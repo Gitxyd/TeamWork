@@ -3,6 +3,8 @@ package com.rx.dao;
 import com.rx.entity.Student;
 import com.rx.entity.StudentExample;
 import java.util.List;
+
+import com.rx.vo.StudentVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +31,6 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    List<StudentVO> findAll(Object o);
 }
