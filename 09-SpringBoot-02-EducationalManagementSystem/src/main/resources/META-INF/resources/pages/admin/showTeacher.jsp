@@ -26,7 +26,7 @@
 			<jsp:include page="menu.jsp"></jsp:include>
 			<div class="col-md-10">
 				<div class="panel panel-default">
-				    <div class="panel-heading">
+				     <div class="panel-heading">
 						<div class="row">
 					    	<h1 class="col-md-5">教师名单管理</h1>
 							<form class="bs-example bs-example-form col-md-5" role="form" style="margin: 20px 0 10px 0;" action="/admin/selectTeacher?page=1&pageSize=4" id="form1" method="post">

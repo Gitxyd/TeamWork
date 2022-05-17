@@ -4,7 +4,9 @@ import com.rx.entity.Selectedcourse;
 import com.rx.entity.SelectedcourseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SelectedcourseMapper {
     long countByExample(SelectedcourseExample example);
 

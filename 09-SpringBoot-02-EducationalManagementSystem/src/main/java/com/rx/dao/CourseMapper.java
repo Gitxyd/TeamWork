@@ -3,8 +3,11 @@ package com.rx.dao;
 import com.rx.entity.Course;
 import com.rx.entity.CourseExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface CourseMapper {
     long countByExample(CourseExample example);
 

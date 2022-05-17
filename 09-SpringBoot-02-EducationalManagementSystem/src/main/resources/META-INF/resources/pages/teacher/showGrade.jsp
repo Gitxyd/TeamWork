@@ -43,8 +43,8 @@
 					        <tbody>
 								<c:forEach items="${selectedCourseList}" var="item">
 									<tr>
-										<td>${item.userid}</td>
-										<td>${item.username}</td>
+										<td>${item.studentCustom.userid}</td>
+										<td>${item.studentCustom.username}</td>
 										<c:if test="${!item.over}">
 											<td>未打分</td>
 											<td>

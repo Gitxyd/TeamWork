@@ -1,10 +1,15 @@
 package com.rx.dao;
 
+import com.rx.entity.Course;
 import com.rx.entity.Teacher;
 import com.rx.entity.TeacherExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.rx.vo.TeacherVO;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface TeacherMapper {
     long countByExample(TeacherExample example);
 
@@ -27,4 +32,13 @@ public interface TeacherMapper {
     int updateByPrimaryKeySelective(Teacher record);
 
     int updateByPrimaryKey(Teacher record);
+
+    //查询教师所有信息以及院系名称
+    List<TeacherVO> findAll();
+
+    //根据名字获取所有教师
+    List<TeacherVO> selectByName(@Param("teacherName") String teacherName);
+
+    //根据教师id查询课程
+    List<Course> selectCourseById(@Param("userId") Integer userId);
 }
