@@ -18,28 +18,6 @@ public class UserloginServiceImpl implements UserloginService {
 
     @Override
     public MessageVO login(String username, String password) {
-        /*ResultVO vo =  new ResultVO();
-
-        UserloginExample example = new UserloginExample();
-
-        UserloginExample.Criteria criteria = example.createCriteria();
-
-        criteria.andUsernameEqualTo(username);
-        criteria.andPasswordEqualTo(password);
-
-        List<Userlogin> users = userloginMapper.selectByExample(example);
-
-        if (users.size() > 0) {
-            vo.setSuccess(true);
-            vo.setMessage("登录成功！");
-            vo.setCode(200);
-        } else {
-            vo.setCode(-1);
-            vo.setMessage("登录失败，当前用户名不存在");
-            vo.setSuccess(false);
-            vo.setData(null);
-
-        }*/
 
         MessageVO vo = new MessageVO();
 
@@ -79,6 +57,20 @@ public class UserloginServiceImpl implements UserloginService {
         }
 
         return vo;
+    }
+
+    //根据教师名字删除对应教师登录用户
+    @Override
+    public void deleteByName(String toString) {
+
+        //声明标准模板
+        UserloginExample example = new UserloginExample();
+
+        UserloginExample.Criteria criteria = example.createCriteria();
+
+        criteria.andUsernameEqualTo(toString);
+
+        userloginMapper.deleteByExample(example);
     }
 
 }

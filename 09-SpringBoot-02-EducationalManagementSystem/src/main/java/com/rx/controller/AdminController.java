@@ -8,7 +8,7 @@ import com.rx.entity.Teacher;
 import com.rx.service.AdminService;
 import com.rx.service.CollegeService;
 import com.rx.service.StudentService;
-import com.rx.service.UserLoginService;
+import com.rx.service.UserloginService;
 import com.rx.vo.ResultVO;
 import com.rx.vo.StudentVO;
 import com.rx.vo.TeacherVO;
@@ -34,8 +34,7 @@ public class AdminController {
     private CollegeService collegeService;
 
     @Autowired
-    private UserLoginService userLoginService;
-
+    private UserloginService userLoginService;
 
     //学生信息显示
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "showStudent")
@@ -84,6 +83,7 @@ public class AdminController {
         return studentService.findById(id);
 
     }
+
     //查询教师所有信息以及课程
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "showTeacher")
     public ModelAndView showTeacher(@RequestParam(defaultValue = "1") Integer page,
@@ -106,7 +106,7 @@ public class AdminController {
 
     //添加教师页面显示
     @GetMapping("addTeacher")
-    public ModelAndView addTeacher(ModelAndView mv){
+    public ModelAndView addTeacher(ModelAndView mv) {
 
         List<College> list = collegeService.findAll();
 
@@ -194,7 +194,7 @@ public class AdminController {
     //保存教师姓名
     @PostMapping("searchTeacherName")
     public void searchTeacherName(Teacher teacher,
-                                  HttpServletRequest request){
+                                  HttpServletRequest request) {
         request.getSession().setAttribute("findTeacherByName", teacher.getUsername());
     }
 }

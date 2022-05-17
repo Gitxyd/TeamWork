@@ -32,7 +32,7 @@ public class UserloginController {
 
             mv.addObject("resultInfo", vo);
 
-            mv.setViewName("redirect:/pages/admin/showStudent.jsp");
+            mv.setViewName("redirect:/admin/showStudent");
         } else if (vo.getCode() == 200 && ((Userlogin)vo.getData()).getRole().equals(1)){
             //teacher login
             session.setAttribute("userlogin", vo.getData());
@@ -40,7 +40,7 @@ public class UserloginController {
             mv.addObject("resultInfo", vo);
 
 
-            mv.setViewName("redirect:/pages/teacher/showCourse.jsp");
+            mv.setViewName("redirect:/admin/showCourse");
 
         } else if (vo.getCode() == 200 && ((Userlogin)vo.getData()).getRole().equals(2)){
            ///student login
@@ -48,7 +48,7 @@ public class UserloginController {
 
             mv.addObject("resultInfo", vo);
 
-            mv.setViewName("redirect:/pages/student/showCourse.jsp");
+            mv.setViewName("redirect:/admin/showCourse");
         } else {
             mv.setViewName("forward:/login.jsp");
         }
