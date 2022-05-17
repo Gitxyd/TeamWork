@@ -82,7 +82,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from role
     where roleID = #{roleid,jdbcType=INTEGER}
@@ -99,9 +99,9 @@
   </delete>
   <insert id="insert" parameterType="com.rx.entity.Role">
     insert into role (roleID, roleName, permissions
-      )
+    )
     values (#{roleid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{permissions,jdbcType=VARCHAR}
-      )
+           )
   </insert>
   <insert id="insertSelective" parameterType="com.rx.entity.Role">
     insert into role
@@ -154,8 +154,8 @@
   <update id="updateByExample" parameterType="map">
     update role
     set roleID = #{record.roleid,jdbcType=INTEGER},
-      roleName = #{record.rolename,jdbcType=VARCHAR},
-      permissions = #{record.permissions,jdbcType=VARCHAR}
+    roleName = #{record.rolename,jdbcType=VARCHAR},
+    permissions = #{record.permissions,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -175,7 +175,7 @@
   <update id="updateByPrimaryKey" parameterType="com.rx.entity.Role">
     update role
     set roleName = #{rolename,jdbcType=VARCHAR},
-      permissions = #{permissions,jdbcType=VARCHAR}
+        permissions = #{permissions,jdbcType=VARCHAR}
     where roleID = #{roleid,jdbcType=INTEGER}
   </update>
 </mapper>

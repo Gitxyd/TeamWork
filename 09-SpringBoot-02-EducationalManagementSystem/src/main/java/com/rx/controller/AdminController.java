@@ -8,7 +8,7 @@ import com.rx.entity.Teacher;
 import com.rx.service.AdminService;
 import com.rx.service.CollegeService;
 import com.rx.service.StudentService;
-import com.rx.service.UserloginService;
+import com.rx.service.UserLoginService;
 import com.rx.vo.ResultVO;
 import com.rx.vo.StudentVO;
 import com.rx.vo.TeacherVO;
@@ -34,7 +34,7 @@ public class AdminController {
     private CollegeService collegeService;
 
     @Autowired
-    private UserloginService userLoginService;
+    private UserLoginService userLoginService;
 
     //学生信息显示
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "showStudent")

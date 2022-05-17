@@ -83,7 +83,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from userlogin
     where userID = #{userid,jdbcType=INTEGER}
@@ -99,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.rx.entity.Userlogin">
-    insert into userlogin (userID, userName, password, 
-      role)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{role,jdbcType=INTEGER})
+    insert into userlogin (userID, userName, password,
+                           role)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+            #{role,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.rx.entity.Userlogin">
     insert into userlogin
@@ -164,9 +164,9 @@
   <update id="updateByExample" parameterType="map">
     update userlogin
     set userID = #{record.userid,jdbcType=INTEGER},
-      userName = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=INTEGER}
+    userName = #{record.username,jdbcType=VARCHAR},
+    password = #{record.password,jdbcType=VARCHAR},
+    role = #{record.role,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -189,8 +189,8 @@
   <update id="updateByPrimaryKey" parameterType="com.rx.entity.Userlogin">
     update userlogin
     set userName = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      role = #{role,jdbcType=INTEGER}
+        password = #{password,jdbcType=VARCHAR},
+        role = #{role,jdbcType=INTEGER}
     where userID = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -89,9 +89,9 @@
   </delete>
   <insert id="insert" parameterType="com.rx.entity.Selectedcourse">
     insert into selectedcourse (courseID, studentID, mark
-      )
+    )
     values (#{courseid,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, #{mark,jdbcType=INTEGER}
-      )
+           )
   </insert>
   <insert id="insertSelective" parameterType="com.rx.entity.Selectedcourse">
     insert into selectedcourse
@@ -144,8 +144,8 @@
   <update id="updateByExample" parameterType="map">
     update selectedcourse
     set courseID = #{record.courseid,jdbcType=INTEGER},
-      studentID = #{record.studentid,jdbcType=INTEGER},
-      mark = #{record.mark,jdbcType=INTEGER}
+    studentID = #{record.studentid,jdbcType=INTEGER},
+    mark = #{record.mark,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

@@ -1,7 +1,7 @@
 package com.rx.controller;
 
 import com.rx.entity.Userlogin;
-import com.rx.service.UserloginService;
+import com.rx.service.UserLoginService;
 import com.rx.vo.MessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserloginController {
      @Autowired
-     private UserloginService userloginService;
+     private UserLoginService userloginService;
 
     @PostMapping("login")
     public ModelAndView login(Userlogin userlogin,ModelAndView mv, HttpSession session) {
