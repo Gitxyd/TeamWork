@@ -90,7 +90,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from student
     where userID = #{userid,jdbcType=INTEGER}
@@ -106,12 +106,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.rx.entity.Student">
-    insert into student (userID, userName, sex, 
-      birthYear, grade, collegeID
-      )
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{birthyear,jdbcType=DATE}, #{grade,jdbcType=DATE}, #{collegeid,jdbcType=INTEGER}
-      )
+    insert into student (userID, userName, sex,
+                         birthYear, grade, collegeID
+    )
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+            #{birthyear,jdbcType=DATE}, #{grade,jdbcType=DATE}, #{collegeid,jdbcType=INTEGER}
+           )
   </insert>
   <insert id="insertSelective" parameterType="com.rx.entity.Student">
     insert into student
@@ -191,11 +191,11 @@
   <update id="updateByExample" parameterType="map">
     update student
     set userID = #{record.userid,jdbcType=INTEGER},
-      userName = #{record.username,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      birthYear = #{record.birthyear,jdbcType=DATE},
-      grade = #{record.grade,jdbcType=DATE},
-      collegeID = #{record.collegeid,jdbcType=INTEGER}
+    userName = #{record.username,jdbcType=VARCHAR},
+    sex = #{record.sex,jdbcType=VARCHAR},
+    birthYear = #{record.birthyear,jdbcType=DATE},
+    grade = #{record.grade,jdbcType=DATE},
+    collegeID = #{record.collegeid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -224,10 +224,10 @@
   <update id="updateByPrimaryKey" parameterType="com.rx.entity.Student">
     update student
     set userName = #{username,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      birthYear = #{birthyear,jdbcType=DATE},
-      grade = #{grade,jdbcType=DATE},
-      collegeID = #{collegeid,jdbcType=INTEGER}
+        sex = #{sex,jdbcType=VARCHAR},
+        birthYear = #{birthyear,jdbcType=DATE},
+        grade = #{grade,jdbcType=DATE},
+        collegeID = #{collegeid,jdbcType=INTEGER}
     where userID = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -6,9 +6,7 @@ import java.util.List;
 
 import com.rx.vo.StudentVO;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface StudentMapper {
     long countByExample(StudentExample example);
 
