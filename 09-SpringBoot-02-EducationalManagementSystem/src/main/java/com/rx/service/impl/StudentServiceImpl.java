@@ -12,11 +12,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
-
     @Autowired
     private StudentMapper studentMapper;
+
+    @Override
+    public PageInfo<Student> showCourse(Integer pageNum, Integer pageSize, Integer userId) {
+/*
+        if (date != null && !date.equals("")) {
+            date = "%" + date + "%";
+        }*/
+
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Student> students = studentMapper.selectByExample(null);
+
+        return new PageInfo<>(students);
+
+
+    }
 
 
     //显示学生信息实现类
@@ -47,7 +63,33 @@ public class StudentServiceImpl implements StudentService {
         return list;
     }
 
-    //学生验证
+    //添加学生
+    @Override
+    public ResultVO add(Student student) {
+        ResultVO resultVO = new ResultVO();
+
+        int affectedRows = studentMapper.insertSelective(student);
+
+        if (affectedRows > 0) {
+            resultVO.setErrorMsg("添加成功");
+            resultVO.setFlag(true);
+        } else {
+            resultVO.setErrorMsg("添加失败");
+            resultVO.setFlag(false);
+        }
+        return resultVO;
+    }
+
+    @Override
+    public int updateById(Object userid, Student student) {
+        return studentMapper.updateByPrimaryKey(student);
+    }
+
+    @Override
+    public int removeById(Integer id) {
+        return studentMapper.deleteByPrimaryKey(id);
+    }
+
     @Override
     public ResultVO findById(Integer id) {
         ResultVO vo;
@@ -63,4 +105,8 @@ public class StudentServiceImpl implements StudentService {
         return vo;
     }
 
+    @Override
+    public Student findByStudentId(Integer id) {
+        return studentMapper.selectByPrimaryKey(id);
+    }
 }

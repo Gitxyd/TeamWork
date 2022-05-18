@@ -16,6 +16,23 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     private UserloginMapper userloginMapper;
 
+    private String name;
+
+    @Override
+    public void save(Userlogin userlogin) {
+        userloginMapper.insert(userlogin);
+    }
+
+    @Override
+    public void removeByName(String toString) {
+        UserloginExample userloginExample = new UserloginExample();
+
+        UserloginExample.Criteria criteria = userloginExample.createCriteria();
+        criteria.andUsernameEqualTo(toString);
+
+        userloginMapper.deleteByExample(userloginExample);
+    }
+
     @Override
     public MessageVO login(String username, String password) {
 

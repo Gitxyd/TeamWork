@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.rx.entity.College;
 import com.rx.entity.Student;
 import com.rx.entity.Teacher;
+import com.rx.entity.Userlogin;
 import com.rx.service.AdminService;
 import com.rx.service.CollegeService;
 import com.rx.service.StudentService;
@@ -26,15 +27,13 @@ public class AdminController {
 
     @Autowired
     private StudentService studentService;
-
     @Autowired
     private AdminService adminService;
-
     @Autowired
     private CollegeService collegeService;
-
     @Autowired
     private UserLoginService userLoginService;
+
 
     //学生信息显示
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "showStudent")
@@ -83,6 +82,120 @@ public class AdminController {
         return studentService.findById(id);
 
     }
+
+    //添加学生信息界面
+    @GetMapping("addStudent")
+    public ModelAndView addStudentShow(ModelAndView mv) {
+
+        List<College> list = collegeService.findAll();
+
+        mv.addObject("collegeList", list);
+
+        mv.setViewName("forward:/pages/admin/addStudent.jsp");
+
+        return mv;
+    }
+
+    //添加学生信息
+    @PostMapping("addStudent")
+    public ModelAndView addStudent(Student student, ModelAndView mv) {
+        ResultVO vo = null;
+
+        System.out.println("Student:" + student);
+        if (student.getUserid() != null) {
+            vo = studentService.add(student);
+        }
+
+        if (vo.getFlag().equals(true)) {
+            Userlogin userlogin = new Userlogin();
+            ;
+
+            userlogin.setUsername(student.getUserid().toString());
+            userlogin.setPassword("123");
+            userlogin.setRole(2);
+            userLoginService.save(userlogin);
+
+            //添加成功后重定向
+            mv.setViewName("redirect:/admin/showStudent");
+
+            return mv;
+        } else {
+            mv.addObject("message", "学号重复");
+
+            //添加失败后转发到指定位置
+            mv.setViewName("forward:/pages/error.jsp");
+
+            return mv;
+        }
+    }
+
+    //修改学生信息显示
+    @GetMapping("editStudent")
+    public ModelAndView editStudentShow(Integer id, ModelAndView mv) throws Exception {
+        if (id == null) {
+
+            mv.setViewName("redirect:/admin/showStudent");
+
+            return mv;
+        }
+
+        ResultVO vo = studentService.findById(id);
+
+        if (vo.getFlag()) {
+            throw new Exception("未找到该名学生");
+        } else {
+            //查询所有系别
+            List<College> list = collegeService.findAll();
+
+            //查找学生
+            Student student = studentService.findByStudentId(id);
+
+            mv.addObject("collegeList", list);
+            mv.addObject("student", student);
+
+            mv.setViewName("forward:/pages/admin/editStudent.jsp");
+
+            return mv;
+        }
+    }
+
+    //修改学生信息
+    @PostMapping("editStudent")
+    public ModelAndView editStudent(Student student, ModelAndView mv) {
+
+        studentService.updateById(student.getUserid(), student);
+
+        mv.setViewName("redirect:/admin/showStudent");
+
+        return mv;
+    }
+
+    //删除学生
+    @GetMapping("removeStudent")
+    public ModelAndView removeStudent(Integer id, ModelAndView mv) {
+        if (id == null) {
+            mv.setViewName("redirect:/admin/showStudent");
+
+            return mv;
+        }
+
+        studentService.removeById(id);
+        userLoginService.removeByName(Integer.toString(id));
+
+        mv.setViewName("redirect:/admin/showStudent");
+
+        return mv;
+    }
+
+    //学生姓名保存
+    @PostMapping("searchStudentName")
+    @ResponseBody
+    public void searchStudentName(@RequestBody Student student, HttpServletRequest request) {
+        String username = student.getUsername();
+
+        request.getSession().setAttribute("findStudentByName", username);
+    }
+
 
     //查询教师所有信息以及课程
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "showTeacher")
