@@ -2,7 +2,9 @@ package com.rx.dao;
 
 import com.rx.entity.College;
 import com.rx.entity.CollegeExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

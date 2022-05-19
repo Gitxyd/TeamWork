@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -21,7 +22,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private UserloginMapper userloginMapper;
-
 
 
     //查询教师所有信息以及院系名称
@@ -44,7 +44,7 @@ public class AdminServiceImpl implements AdminService {
 
         Teacher teacher = teacherMapper.selectByPrimaryKey(id);
 
-        if (teacher == null){
+        if (teacher == null) {
             vo = new ResultVO(true, "");
         }
         return vo;
@@ -119,5 +119,11 @@ public class AdminServiceImpl implements AdminService {
         List<TeacherVO> list = teacherMapper.selectByName(teacherName);
 
         return new PageInfo<>(list);
+    }
+
+    //查询所有教师
+    @Override
+    public List<Teacher> findAll() {
+        return teacherMapper.selectByExample(null);
     }
 }

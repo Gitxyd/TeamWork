@@ -2,14 +2,8 @@ package com.rx.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.rx.entity.College;
-import com.rx.entity.Student;
-import com.rx.entity.Teacher;
-import com.rx.entity.Userlogin;
-import com.rx.service.AdminService;
-import com.rx.service.CollegeService;
-import com.rx.service.StudentService;
-import com.rx.service.UserLoginService;
+import com.rx.entity.*;
+import com.rx.service.*;
 import com.rx.vo.ResultVO;
 import com.rx.vo.StudentVO;
 import com.rx.vo.TeacherVO;
@@ -33,6 +27,8 @@ public class AdminController {
     private CollegeService collegeService;
     @Autowired
     private UserLoginService userLoginService;
+    @Autowired
+    private CourseService courseService;
 
 
     //学生信息显示
@@ -194,6 +190,135 @@ public class AdminController {
         String username = student.getUsername();
 
         request.getSession().setAttribute("findStudentByName", username);
+    }
+
+    //课程信息显示
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, value = "showCourse")
+    public ModelAndView showCourse(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                   @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize,
+                                   ModelAndView mv) {
+
+        PageInfo<Course> pageInfo = courseService.findByPage(page, pageSize);
+        mv.addObject("CoursePageInfo", pageInfo);
+        mv.setViewName("forward:/pages/admin/showCourse.jsp");
+
+        return mv;
+    }
+
+    //课号验证
+    @PostMapping("checkCourseId")
+    @ResponseBody
+    public ResultVO checkCourseId(Integer id) {
+
+        return courseService.findById(id);
+
+    }
+
+    //添加课程界面显示
+    @GetMapping("addCourse")
+    public ModelAndView addCourseShow(ModelAndView mv) {
+
+        //查询所有系别
+        List<College> collegeList = collegeService.findAll();
+        //查询所有教师
+        List<Teacher> teacherList = adminService.findAll();
+
+        mv.addObject("collegeList", collegeList);
+        mv.addObject("teacherList", teacherList);
+
+        mv.setViewName("forward:/pages/admin/addCourse.jsp");
+
+        return mv;
+    }
+
+
+    //添加课程信息
+    @PostMapping("addCourse")
+    public ModelAndView addCourse(Course course, ModelAndView mv) {
+        ResultVO vo;
+
+        if (course.getCourseid() != null) {
+            vo = courseService.add(course);
+
+            //添加成功后重定向
+            mv.setViewName("redirect:/pages/admin/editCourse.jsp");
+        } else {
+            mv.addObject("message", "课程号重复");
+
+            //添加失败后转发到指定位置
+            mv.setViewName("forward:/pages/error.jsp");
+
+        }
+
+        return mv;
+    }
+
+    //修改课程信息
+    @RequestMapping("editCourse")
+    public ModelAndView editCourse(Course course, ModelAndView mv) {
+
+        courseService.updateById(course.getCourseid(), course);
+
+        mv.setViewName("redirect:/admin/showCourse");
+
+        return mv;
+    }
+
+
+    //删除课程
+    @GetMapping("removeCourse")
+    public ModelAndView removeCourse(Integer id, ModelAndView mv) {
+        if (id == null) {
+            mv.setViewName("redirect:/admin/showCourse");
+
+            return mv;
+        }
+
+        courseService.removeByName(id);
+        userLoginService.removeByName(id.toString());
+
+        mv.setViewName("redirect:/admin/showCourse");
+
+        return mv;
+    }
+
+    //课程名保存
+    @PostMapping("searchCourseName")
+    @ResponseBody
+    public void searchCourseName(@RequestBody Course course, HttpServletRequest request) {
+        String name = course.getCoursename();
+
+        //将查询的 课程名称存入session中
+        request.getSession().setAttribute("findCourseByName", name);
+
+    }
+
+
+    //课程搜索
+    @PostMapping("selectCourse")
+    public ModelAndView selectCourse(HttpServletRequest request,
+                                     @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                     @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize,
+                                     ModelAndView mv) {
+
+        String findCourseByName = request.getParameter("findCourseByName");
+
+        System.out.println(findCourseByName);
+
+        //开启分页
+        PageHelper.startPage(page, pageSize);
+
+        List<Course> list = courseService.findCourseByName(findCourseByName, page, pageSize);
+
+        System.out.println(list);
+
+        PageInfo<Course> selectCourseInfo = new PageInfo(list);
+
+        mv.addObject("selectCourseInfo", selectCourseInfo);
+
+        mv.setViewName("forward:/pages/admin/selectCourse.jsp");
+
+        return mv;
     }
 
 

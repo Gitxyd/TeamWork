@@ -15,17 +15,17 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserloginController {
-     @Autowired
-     private UserLoginService userloginService;
+    @Autowired
+    private UserLoginService userloginService;
 
     @PostMapping("login")
-    public ModelAndView login(Userlogin userlogin,ModelAndView mv, HttpSession session) {
+    public ModelAndView login(Userlogin userlogin, ModelAndView mv, HttpSession session) {
         // 通过vo封装获取账户密码
         MessageVO vo = userloginService.login(userlogin.getUsername(), userlogin.getPassword());
 
 
         // 权限管理
-        if (vo.getCode() == 200 && ((Userlogin)vo.getData()).getRole().equals(0)) {
+        if (vo.getCode() == 200 && ((Userlogin) vo.getData()).getRole().equals(0)) {
             //admin login
             //账户密码存到session中
             session.setAttribute("userlogin", vo.getData());
@@ -33,7 +33,7 @@ public class UserloginController {
             mv.addObject("resultInfo", vo);
 
             mv.setViewName("redirect:/admin/showStudent");
-        } else if (vo.getCode() == 200 && ((Userlogin)vo.getData()).getRole().equals(1)){
+        } else if (vo.getCode() == 200 && ((Userlogin) vo.getData()).getRole().equals(1)) {
             //teacher login
             session.setAttribute("userlogin", vo.getData());
 
@@ -42,8 +42,8 @@ public class UserloginController {
 
             mv.setViewName("redirect:/admin/showCourse");
 
-        } else if (vo.getCode() == 200 && ((Userlogin)vo.getData()).getRole().equals(2)){
-           ///student login
+        } else if (vo.getCode() == 200 && ((Userlogin) vo.getData()).getRole().equals(2)) {
+            ///student login
             session.setAttribute("userlogin", vo.getData());
 
             mv.addObject("resultInfo", vo);
@@ -55,6 +55,7 @@ public class UserloginController {
 
         return mv;
     }
+
     // 退出登录
     @GetMapping("logout")
     public ModelAndView logout(HttpSession session, HttpServletResponse response, ModelAndView mv) {
@@ -75,8 +76,6 @@ public class UserloginController {
         mv.setViewName("redirect:/login.jsp");
         return mv;
     }
-
-
 
 
 }

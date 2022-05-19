@@ -8,7 +8,6 @@ public interface UserLoginService {
 
     void deleteByName(String toString);
 
-
     void removeByName(String toString);
 
     void save(Userlogin userlogin);
