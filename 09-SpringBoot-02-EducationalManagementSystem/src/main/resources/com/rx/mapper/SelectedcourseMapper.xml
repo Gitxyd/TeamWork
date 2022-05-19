@@ -6,6 +6,14 @@
     <result column="studentID" jdbcType="INTEGER" property="studentid" />
     <result column="mark" jdbcType="INTEGER" property="mark" />
   </resultMap>
+
+  <select id="findCourseByMark" parameterType="java.lang.Integer" resultType="com.rx.entity.Course">
+    select c.*,sd.mark
+    from selectedcourse sd
+           inner join course c
+                      on sd.courseID = c.courseID where sd.studentID = #{id}
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
