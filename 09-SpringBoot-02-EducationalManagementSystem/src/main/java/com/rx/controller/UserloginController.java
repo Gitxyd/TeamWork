@@ -40,7 +40,7 @@ public class UserloginController {
             mv.addObject("resultInfo", vo);
 
 
-            mv.setViewName("redirect:/admin/showCourse");
+            mv.setViewName("redirect:/teacher/showCourse");
 
         } else if (vo.getCode() == 200 && ((Userlogin) vo.getData()).getRole().equals(2)) {
             ///student login
@@ -48,7 +48,7 @@ public class UserloginController {
 
             mv.addObject("resultInfo", vo);
 
-            mv.setViewName("redirect:/admin/showCourse");
+            mv.setViewName("redirect:/student/showCourse");
         } else {
             mv.setViewName("forward:/login.jsp");
         }
