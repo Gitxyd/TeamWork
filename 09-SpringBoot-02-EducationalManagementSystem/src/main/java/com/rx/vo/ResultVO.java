@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResultVO {
     private Boolean flag;
-    private String errorMsg;}
+    private String errorMsg;
+}

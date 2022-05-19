@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class StudentVO extends Student{
+public class StudentVO extends Student {
     private String collegeName;
 }

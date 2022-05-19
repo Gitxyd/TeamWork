@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Service
-public class UserloginServiceImpl implements UserLoginService {
+public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     private UserloginMapper userloginMapper;
 

@@ -2,9 +2,13 @@ package com.rx.dao;
 
 import com.rx.entity.Role;
 import com.rx.entity.RoleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface RoleMapper {
     long countByExample(RoleExample example);
 

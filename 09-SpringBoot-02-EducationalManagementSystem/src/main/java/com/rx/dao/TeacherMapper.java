@@ -2,11 +2,14 @@ package com.rx.dao;
 
 import com.rx.entity.Teacher;
 import com.rx.entity.TeacherExample;
+
 import java.util.List;
 
 import com.rx.vo.TeacherVO;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TeacherMapper {
     long countByExample(TeacherExample example);
 
