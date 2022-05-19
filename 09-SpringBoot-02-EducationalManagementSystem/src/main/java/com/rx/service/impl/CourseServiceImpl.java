@@ -1,19 +1,15 @@
 package com.rx.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.rx.dao.CollegeMapper;
 import com.rx.dao.CourseMapper;
 import com.rx.dao.SelectedcourseMapper;
 import com.rx.entity.Course;
-import com.rx.service.CourseService;
-import com.rx.vo.SelectedCourseVO;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.rx.dao.CourseMapper;
-import com.rx.entity.Course;
 import com.rx.entity.CourseExample;
-import com.rx.entity.Student;
-import com.rx.entity.StudentExample;
 import com.rx.service.CourseService;
 import com.rx.vo.ResultVO;
+import com.rx.vo.SelectedCourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +28,6 @@ public class CourseServiceImpl implements CourseService {
     private SelectedcourseMapper selectedcourseMapper;
 
     //展示课程
-    @Override
     public PageInfo<Course> showCourse(Integer pageNum, Integer pageSize) {
 
         PageHelper.startPage(pageNum, pageSize);
@@ -58,8 +53,6 @@ public class CourseServiceImpl implements CourseService {
 
     }
 
-    private SelectedcourseMapper selectedcourseMapper;
-
     //查询学生课程关联表加学生姓名
     @Override
     public List<SelectedCourseVO> selectInfo(Integer id) {
@@ -76,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
     public SelectedCourseVO updateByStudent(Integer studentid, Integer courseid, String name, Integer mark) {
 
         SelectedCourseVO vo = selectedcourseMapper.updateByKey(studentid, courseid, mark);
-        if (vo != null){
+        if (vo != null) {
             vo.setOver(true);
         }
         return vo;
@@ -89,6 +82,7 @@ public class CourseServiceImpl implements CourseService {
         vo = courseMapper.selectByIdName(studentid, courseid);
         return vo;
     }
+
     //课程信息显示
     @Override
     public PageInfo<Course> findByPage(Integer page, Integer pageSize) {

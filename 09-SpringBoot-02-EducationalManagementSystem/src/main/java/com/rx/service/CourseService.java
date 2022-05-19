@@ -1,13 +1,9 @@
 package com.rx.service;
 
-import com.rx.entity.Course;
-import com.rx.vo.SelectedCourseVO;
-
-import com.github.pagehelper.PageInfo;
-import com.rx.entity.Course;
 import com.github.pagehelper.PageInfo;
 import com.rx.entity.Course;
 import com.rx.vo.ResultVO;
+import com.rx.vo.SelectedCourseVO;
 
 import java.util.List;
 

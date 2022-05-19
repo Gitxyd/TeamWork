@@ -1,5 +1,6 @@
 package com.rx.dao;
 
+import com.rx.entity.Course;
 import com.rx.entity.Selectedcourse;
 import com.rx.entity.SelectedcourseExample;
 import java.util.List;
