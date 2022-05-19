@@ -43,12 +43,12 @@
 					        <tbody>
 								<c:forEach items="${selectedCourseList}" var="item">
 									<tr>
-										<td>${item.studentCustom.userid}</td>
-										<td>${item.studentCustom.username}</td>
+										<td>${item.userid}</td>
+										<td>${item.username}</td>
 										<c:if test="${!item.over}">
 											<td>未打分</td>
 											<td>
-												<button class="btn btn-default btn-xs btn-info" onClick="location.href='/teacher/mark?studentid=${item.studentid}&courseid=${item.courseid}'">打分</button>
+												<button classttgt="btn btn-default btn-xs btn-info" onClick="location.href='/teacher/mark?studentid=${item.studentid}&courseid=${item.courseid}'">打分</button>
 											</td>
 										</c:if>
 										<c:if test="${item.over}">

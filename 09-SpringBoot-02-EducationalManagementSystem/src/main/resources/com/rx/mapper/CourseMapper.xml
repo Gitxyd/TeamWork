@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rx.dao.CourseMapper">
+    <!--查询学生课程关联表加学生姓名-->
+    <select id="findAll" resultType="com.rx.vo.SelectedCourseVO">
+        select *
+        from selectedcourse sd
+                 inner join student s
+                            on sd.studentID = s.userID
+        where sd.courseID = #{id}
+    </select>
+
+    <select id="selectByIdName" resultType="com.rx.vo.SelectedCourseVO">
+        select *
+        from selectedcourse sd
+                 inner join student s
+                            on sd.studentID = s.userID
+        where sd.courseID = #{courseId} and s.userID = #{studentId}
+    </select>
     <resultMap id="BaseResultMap" type="com.rx.entity.Course">
         <id column="courseID" jdbcType="INTEGER" property="courseid"/>
         <result column="courseName" jdbcType="VARCHAR" property="coursename"/>

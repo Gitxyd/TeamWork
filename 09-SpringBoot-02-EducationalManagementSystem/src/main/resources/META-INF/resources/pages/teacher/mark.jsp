@@ -41,7 +41,7 @@
 							  <div class="form-group">
 							    <label for="inputPassword3" class="col-sm-2 control-label">姓名</label>
 							    <div class="col-sm-10">
-							      <input  readonly="readonly" type="text" name="name" class="form-control" id="inputPassword3" value="${selectedCourse.studentCustom.username}">
+							      <input  readonly="readonly" type="text" name="name" class="form-control" id="inputPassword3" value="${selectedCourse.username}">
 							    </div>
 							  </div>
 							  <div class="form-group">

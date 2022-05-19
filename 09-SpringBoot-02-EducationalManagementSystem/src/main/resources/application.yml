@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/educationalmanagementsystem?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimeZone=GTM+8
     username: root
-    password: goodgoodstudy
+    password: 123456
 # MyBatis配置
 mybatis:
   # mybatis配置文件的路径
