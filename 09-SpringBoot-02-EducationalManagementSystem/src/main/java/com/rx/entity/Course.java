@@ -1,5 +1,8 @@
 package com.rx.entity;
 
+import lombok.Data;
+
+@Data
 public class Course {
     private Integer courseid;
 
@@ -18,6 +21,12 @@ public class Course {
     private Integer collegeid;
 
     private Integer score;
+
+    // 扩展一个打分
+    private Integer mark;
+
+    // 判断是否已选课程
+    private Boolean over;
 
     public Integer getCourseid() {
         return courseid;

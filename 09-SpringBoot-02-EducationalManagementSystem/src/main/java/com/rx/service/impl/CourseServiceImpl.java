@@ -12,10 +12,43 @@ import java.util.List;
 
 @Service
 public class CourseServiceImpl implements CourseService {
+
     @Autowired
     private CourseMapper courseMapper;
 
     @Autowired
+    private CollegeMapper collegeMapper;
+
+    @Autowired
+    private SelectedcourseMapper selectedcourseMapper;
+
+    //展示课程
+    @Override
+    public PageInfo<Course> showCourse(Integer pageNum, Integer pageSize) {
+
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Course> courses = courseMapper.selectByExample(null);
+
+        return new PageInfo<>(courses);
+    }
+
+    // 搜索课程
+    @Override
+    public List<Course> findCourseByKeyword(String findCourseByName, Integer page, Integer pageSize) {
+        CourseExample courseExample = new CourseExample();
+
+        CourseExample.Criteria criteria = courseExample.createCriteria();
+
+        criteria.andCoursenameLike("%" + findCourseByName + "%");
+
+        // 开启分页
+        PageHelper.startPage(page, pageSize);
+
+         return courseMapper.selectByExample(courseExample);
+
+    }
+
     private SelectedcourseMapper selectedcourseMapper;
 
     //查询学生课程关联表加学生姓名
